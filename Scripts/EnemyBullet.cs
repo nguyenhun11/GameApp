@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class EnemyBullet : MonoBehaviour
 {
@@ -37,5 +38,15 @@ public class EnemyBullet : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    //virtual protected Quaternion firstRotation()
+    //{
+    //    return Quaternion.identity;
+    //}
+    //virtual public void Appear(Vector3 EnemyPosition)
+    //{
+    //    Quaternion rotation = firstRotation();
+    //    Instantiate(this, EnemyPosition, rotation);
+    //}
+
 
 }

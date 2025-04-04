@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            ModifyHealth(collision.gameObject.GetComponent<GeneralEnemy>().damage);
+            //ModifyHealth(collision.gameObject.GetComponent<GeneralEnemy>().damage);
             TempDeath();
         }
     }
@@ -68,14 +68,14 @@ public class PlayerController : MonoBehaviour
     {
         IsFainted = true;
         GetComponent<Collider2D>().enabled = false;
-        transform.Find("eye").gameObject.SetActive(false);
+        
 
     }
     private void Revive()
     {
         IsFainted = false;
         GetComponent <Collider2D>().enabled = true;
-        transform.Find("eye").gameObject.SetActive(true);
+        //transform.Find("eye").gameObject.SetActive(true);
     }
     private void HandleMove()
     {

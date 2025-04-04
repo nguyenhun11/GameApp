@@ -5,19 +5,18 @@ using UnityEngine.UIElements;
 
 public class EnemiesManager : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
+    private GameObject player;
     [SerializeField] private GameObject Enemy1;
     [SerializeField] private int NumberEnemy1;
     [SerializeField] private GameObject Enemy2;
     [SerializeField] private int NumberEnemy2;
     [SerializeField] private GameObject Enemy3;
     [SerializeField] private int NumberEnemy3;
+    [SerializeField] private GameObject Enemy4;
+    [SerializeField] private int NumberEnemy4;
 
 
 
-
-    private float ScreenHeight;
-    private float ScreenWidth;
     [SerializeField] private float minTimeAppear;
     [SerializeField] private float maxTimeAppear;
     private float spawnInterval; // Thời gian giữa các lần xuất hiện
@@ -27,8 +26,6 @@ public class EnemiesManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        ScreenHeight = Camera.main.orthographicSize;
-        ScreenWidth = ScreenHeight * Camera.main.aspect;
         spawnTimer = 0;
         spawnInterval = Random.Range(minTimeAppear, maxTimeAppear);
         player = GameObject.FindGameObjectWithTag("Player");
@@ -56,6 +53,10 @@ public class EnemiesManager : MonoBehaviour
         {
             availableEnemyTypes.Add(3);
         }
+        if (NumberEnemy4 > 0)
+        {
+            availableEnemyTypes.Add(4);
+        }
         if (availableEnemyTypes.Count > 0)
         {
             EnemyType = availableEnemyTypes[Random.Range(0, availableEnemyTypes.Count)];
@@ -80,6 +81,9 @@ public class EnemiesManager : MonoBehaviour
                     case 3:
                         Enemy3Appear();
                         break;
+                    case 4:
+                        Enemy4Appear();
+                        break;
                 }
                 spawnTimer = 0f; // Đặt lại bộ đếm sau mỗi lần xuất hiện
                 spawnInterval = Random.Range(minTimeAppear, maxTimeAppear);
@@ -92,31 +96,7 @@ public class EnemiesManager : MonoBehaviour
         if (NumberEnemy1 > 0)
         {
             NumberEnemy1--;
-            int DirectTypeEnemy1 = Random.Range(1, 5); //1Down 2Up 3Left 4Right
-            Vector3 position = Vector3.zero;
-            Quaternion rotation = Quaternion.identity;
-            if (DirectTypeEnemy1 == 1)
-            {
-                position = new Vector3(Random.Range(-ScreenWidth, ScreenWidth), ScreenHeight + 1);
-                rotation = Quaternion.Euler(0, 0, 180);
-            }
-            else if (DirectTypeEnemy1 == 2)
-            {
-                position = new Vector3(Random.Range(-ScreenWidth, ScreenWidth), -ScreenHeight - 1);
-                rotation = Quaternion.Euler(0, 0, 0);
-            }
-            else if (DirectTypeEnemy1 == 3)
-            {
-                position = new Vector3(ScreenWidth + 1, Random.Range(-ScreenHeight, ScreenHeight));
-                rotation = Quaternion.Euler(0, 0, 90);
-
-            }
-            else if (DirectTypeEnemy1 == 4)
-            {
-                position = new Vector3(-ScreenWidth - 1, Random.Range(-ScreenHeight, ScreenHeight));
-                rotation = Quaternion.Euler(0, 0, -90);
-            }
-            Instantiate(Enemy1, position, rotation);
+            Enemy1.GetComponent<Enemy1>().Appear(Enemy1);
         }
     }
     private void Enemy2Appear()
@@ -124,29 +104,7 @@ public class EnemiesManager : MonoBehaviour
         if (player != null && NumberEnemy2 > 0)
         {
             NumberEnemy2--;
-            Vector3 position = Vector3.zero;
-            int DirectType = Random.Range(1, 5); //1Up 2Down 3Left 4Right
-            switch (DirectType)
-            {
-                case 1:
-                    position = new Vector3(Random.Range(-ScreenWidth, ScreenWidth), -ScreenHeight - 1);
-                    break;
-                case 2:
-                    position = new Vector3(Random.Range(-ScreenWidth, ScreenWidth), ScreenHeight + 1);
-                    break;
-                case 3:
-                    position = new Vector3(ScreenWidth + 1, Random.Range(-ScreenHeight, ScreenHeight));
-                    break;
-                case 4:
-                    position = new Vector3(-ScreenWidth - 1, Random.Range(-ScreenHeight, ScreenHeight));
-                    break;
-                default:
-                    break;
-            }
-            Vector3 direction = (player.transform.position - position).normalized;
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            Quaternion rotation = Quaternion.Euler(0, 0, angle - 90);
-            Instantiate(Enemy2, position, rotation);
+            Enemy2.GetComponent<Enemy2>().Appear(Enemy2);
         }
     }
     private void Enemy3Appear()
@@ -154,29 +112,15 @@ public class EnemiesManager : MonoBehaviour
         if (player != null && NumberEnemy3 > 0)
         {
             NumberEnemy3--;
-            Vector3 position = Vector3.zero;
-            int DirectType = Random.Range(1, 5); //1Up 2Down 3Left 4Right
-            switch (DirectType)
-            {
-                case 1:
-                    position = new Vector3(Random.Range(-ScreenWidth, ScreenWidth), -ScreenHeight - 1);
-                    break;
-                case 2:
-                    position = new Vector3(Random.Range(-ScreenWidth, ScreenWidth), ScreenHeight + 1);
-                    break;
-                case 3:
-                    position = new Vector3(ScreenWidth + 1, Random.Range(-ScreenHeight, ScreenHeight));
-                    break;
-                case 4:
-                    position = new Vector3(-ScreenWidth - 1, Random.Range(-ScreenHeight, ScreenHeight));
-                    break;
-                default:
-                    break;
-            }
-            Vector3 direction = (player.transform.position - position).normalized;
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            Quaternion rotation = Quaternion.Euler(0, 0, angle - 90);
-            Instantiate(Enemy3, position, rotation);
+            Enemy3.GetComponent<Enemy3>().Appear(Enemy3);
+        }
+    }
+    private void Enemy4Appear()
+    {
+        if (player != null && NumberEnemy4 > 0)
+        {
+            NumberEnemy4--;
+            Enemy4.GetComponent<Enemy4>().Appear(Enemy4);
         }
     }
 
