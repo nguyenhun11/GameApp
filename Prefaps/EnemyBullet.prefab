@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6732012912805280724}
+  - component: {fileID: 4032701306179561415}
   - component: {fileID: 3810118020262659323}
   - component: {fileID: 2595957713400961339}
-  - component: {fileID: 4032701306179561415}
-  - component: {fileID: 1233977292873500080}
+  - component: {fileID: 8094959040250000741}
   m_Layer: 0
   m_Name: EnemyBullet
   m_TagString: EnemyBullet
@@ -35,6 +35,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4032701306179561415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 699708744271841480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d10b36efcd8632546a199329e99744c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BulletSpeed: 7
 --- !u!212 &3810118020262659323
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -76,8 +89,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 781234947
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: -3080481381580708672, guid: 4312b90cbd7ecda46b2f1befb71af435, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -117,21 +130,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &4032701306179561415
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 699708744271841480}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d10b36efcd8632546a199329e99744c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BulletSpeed: 7
---- !u!58 &1233977292873500080
-CircleCollider2D:
+--- !u!60 &8094959040250000741
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -165,4 +165,43 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.28, y: 1.27}
+    newSize: {x: 0.8828125, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.42, y: -0.105}
+      - {x: 0.56, y: -0.055}
+      - {x: 0.64, y: -0.015}
+      - {x: 0.64, y: 0.024999999}
+      - {x: 0.55, y: 0.055}
+      - {x: 0.39, y: 0.114999995}
+      - {x: 0.24, y: 0.16499999}
+      - {x: 0.16, y: 0.255}
+      - {x: 0.12, y: 0.36499998}
+      - {x: 0.04, y: 0.625}
+      - {x: 0.02, y: 0.635}
+      - {x: -0.03, y: 0.635}
+      - {x: -0.08, y: 0.475}
+      - {x: -0.16, y: 0.255}
+      - {x: -0.21, y: 0.175}
+      - {x: -0.56, y: 0.055}
+      - {x: -0.64, y: 0.015}
+      - {x: -0.64, y: -0.024999999}
+      - {x: -0.41, y: -0.105}
+      - {x: -0.24, y: -0.16499999}
+      - {x: -0.16, y: -0.255}
+      - {x: -0.12, y: -0.36499998}
+      - {x: -0.04, y: -0.625}
+      - {x: -0.01, y: -0.635}
+      - {x: 0.02, y: -0.635}
+      - {x: 0.03, y: -0.615}
+      - {x: 0.16, y: -0.255}
+      - {x: 0.21, y: -0.175}
+  m_UseDelaunayMesh: 0

@@ -9,10 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8293599888479410664}
-  - component: {fileID: 3357952486283866954}
   - component: {fileID: 608615254490702630}
+  - component: {fileID: 3357952486283866954}
   - component: {fileID: -8191678795713767601}
-  - component: {fileID: 6880893654147306868}
   - component: {fileID: -3608899196619205391}
   m_Layer: 0
   m_Name: Enemy1
@@ -36,6 +35,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &608615254490702630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3424970884907433290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a7a7b876bce3c3459d813f710bed917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyHealth: 4
+  EnemySpeed: 3
 --- !u!212 &3357952486283866954
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -77,8 +90,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1645171687
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 4801227835787818748, guid: e08f87b72d1f8234cb0f869153f909ad, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -91,19 +104,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &608615254490702630
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3424970884907433290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a7a7b876bce3c3459d813f710bed917, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EnemySpeed: 8
 --- !u!50 &-8191678795713767601
 Rigidbody2D:
   serializedVersion: 5
@@ -131,19 +131,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &6880893654147306868
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3424970884907433290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d8220109629f954fbe0e8d5d191875f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 1
 --- !u!58 &-3608899196619205391
 CircleCollider2D:
   m_ObjectHideFlags: 0

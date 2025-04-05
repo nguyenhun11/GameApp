@@ -3,19 +3,19 @@ using UnityEngine;
 
 public class BaseEnemy : MonoBehaviour
 {
-    protected int damage = 1;
-    public float EnemySpeed = 2f;
-
+    [SerializeField] protected float EnemySpeed = 2f;
+    [SerializeField] protected int EnemyHealth = 1;
+    //[HideInInspector] public PoolingEnemy myPool;
 
     ///////////////////////////
 
 
-    virtual protected void Start()
+    protected virtual void Start()
     {
         
     }
 
-    virtual protected void Update()
+    protected virtual void Update()
     {
         move();
         AutoDestroy();
@@ -25,18 +25,18 @@ public class BaseEnemy : MonoBehaviour
     {
         float Height = Camera.main.orthographicSize;
         float Width = Height * Camera.main.aspect;
-        if (Mathf.Abs(transform.position.x) - Width > 2 || Mathf.Abs(transform.position.y) - Height > 2)
+        if (Mathf.Abs(transform.position.x) - Width > 1 || Mathf.Abs(transform.position.y) - Height > 1)
         {
-            Destroy(gameObject);
+            Die();
         }
     }
 
-    virtual protected void move()
+    protected virtual void move()
     {
         transform.position += transform.up * EnemySpeed * Time.deltaTime;
     }
 
-    virtual protected Vector3 firstPositionRandomAppear()
+    public virtual Vector3 firstPositionRandomAppear()
     {
         float screenHeight = Camera.main.orthographicSize;
         float screenWidth = Camera.main.aspect * screenHeight;
@@ -61,7 +61,7 @@ public class BaseEnemy : MonoBehaviour
         return position;
     }
 
-    virtual protected Quaternion firstRotation(Vector3 spawnPosition)
+    public virtual Quaternion firstRotation(Vector3 spawnPosition)
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         Vector3 direction = player.transform.position - spawnPosition;
@@ -69,13 +69,45 @@ public class BaseEnemy : MonoBehaviour
         return Quaternion.Euler(0, 0, angle - 90);
     }
 
-    virtual public void Appear(GameObject prefapEnemy)
+    public virtual void Appear(GameObject prefapEnemy)
     {
         Vector3 position = firstPositionRandomAppear();
         Quaternion rotation = firstRotation(position);
         Instantiate(prefapEnemy, position, rotation);
     }
 
+    //public virtual void Appear(Vector3 position, Quaternion rotation)
+    //{
+    //    gameObject.SetActive(true);
+    //    transform.position = position;
+    //    transform.rotation = rotation;
+    //}
+
+    public void ModifiHealth(int damage)
+    {
+        EnemyHealth += damage;
+        if (EnemyHealth <= 0)
+        {
+            Die();
+        }
+    }
     
+    private void Die()
+    {
+        Destroy(gameObject);
+        //ReturnToPool();
+    }
+
+    //private void ReturnToPool()
+    //{
+    //    if (myPool != null)
+    //    {
+    //        myPool.ReturnEnemy(gameObject);
+    //    }
+    //    else
+    //    {
+    //        Destroy(gameObject); // fallback nếu chưa gán pool
+    //    }
+    //}
 
 }

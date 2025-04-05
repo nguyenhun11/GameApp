@@ -1,52 +1,19 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class EnemyBullet : MonoBehaviour
+public class EnemyBullet : BaseBullet
 {
-    public float BulletSpeed;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        move();
-        AutoDestroy();
-    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            GameObject player = collision.gameObject;
-            player.GetComponent<PlayerController>().ModifyHealth(-1);
-            player.GetComponent<PlayerController>().TempDeath();
-            Destroy(gameObject);
+            collision.GetComponent<PlayerHealth>().ModifyHealth(-1);
+            collision.GetComponent<PlayerHealth>().TempDeath();
+            Destroy();
         }
     }
-    private void move()
+    protected override void Destroy()
     {
-        transform.position += transform.up * BulletSpeed * Time.deltaTime;
+        PoolingEnemyBullet1.instance.ReturnBullet(gameObject);
     }
-    private void AutoDestroy()
-    {
-        float Height = Camera.main.orthographicSize;
-        float Width = Height * Camera.main.aspect;
-        if (Mathf.Abs(transform.position.x) - Width > 2 || Mathf.Abs(transform.position.y) - Height > 2)
-        {
-            Destroy(gameObject);
-        }
-    }
-    //virtual protected Quaternion firstRotation()
-    //{
-    //    return Quaternion.identity;
-    //}
-    //virtual public void Appear(Vector3 EnemyPosition)
-    //{
-    //    Quaternion rotation = firstRotation();
-    //    Instantiate(this, EnemyPosition, rotation);
-    //}
-
-
 }

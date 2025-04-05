@@ -22,7 +22,8 @@ public class Enemy4 : BaseEnemy
         Vector3 direction = player.transform.position - this.transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         Quaternion rotation = Quaternion.Euler(0, 0, angle - 90);
-        transform.rotation = rotation;
+        //transform.rotation = rotation;
+        transform.rotation = Quaternion.RotateTowards(transform.rotation,rotation,200*Time.deltaTime);
     }
     protected override void move()
     {

@@ -9,73 +9,23 @@ public class PlayerController : MonoBehaviour
     public float acceleration = 15f; //Gia tooc
     public float friction = 15f;//ma sat
     private Vector3 velocity = Vector3.zero;
-    public int MaxHealth = 5;
-    public int Health;
-    public float timeOfTempDie = 2f;
-    private bool isTempDeathActive = false;
-    private float Timer;
-    public bool IsFainted = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     void Start()
     {
         Debug.Log("Start");
-        Health = MaxHealth;
-        Timer = 0f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isTempDeathActive)
-        {
-            Timer += Time.deltaTime;
-            if (Timer > timeOfTempDie)
-            {
-                isTempDeathActive = false;
-                Timer = 0f;
-                Revive();
-            }
-        }
-        if (!IsFainted)
+        if (!GetComponent<PlayerHealth>().IsFainted)
         {
             HandleMove();
             RotationToMouse();
             ShootBullet();
         }
 
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Enemy"))
-        {
-            //ModifyHealth(collision.gameObject.GetComponent<GeneralEnemy>().damage);
-            TempDeath();
-        }
-    }
-
-    public void ModifyHealth(int a)
-    {
-        Health = Mathf.Min(MaxHealth, Health + a);
-    }
-    public void TempDeath()
-    {
-        Timer = 0f;
-        Fainted();
-        isTempDeathActive = true;
-    }
-    private void Fainted()
-    {
-        IsFainted = true;
-        GetComponent<Collider2D>().enabled = false;
-        
-
-    }
-    private void Revive()
-    {
-        IsFainted = false;
-        GetComponent <Collider2D>().enabled = true;
-        //transform.Find("eye").gameObject.SetActive(true);
     }
     private void HandleMove()
     {
@@ -114,12 +64,14 @@ public class PlayerController : MonoBehaviour
     }
     private void ShootBullet()
     {
-        if (Input.GetMouseButtonDown(0)) // Nhấn chuột trái
+        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)) 
         {
 
-            GameObject bullet = Instantiate(Bullet, transform.position, transform.rotation);
+            GameObject bullet = PoolingPlayerBullet1.instance.GetBullet();
+            bullet.transform.position = transform.position;
+            bullet.transform.rotation = transform.rotation;
 
-            Destroy(bullet, 1);
+            
         }
     }
     private void OnTheScreen()
