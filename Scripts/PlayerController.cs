@@ -4,27 +4,31 @@ using UnityEngine.InputSystem.XR.Haptics;
 
 public class PlayerController : MonoBehaviour
 {
-    public GameObject Bullet; //The bullet
+    private GameObject Bullet; //The bullet
     public float MaxSpeed = 5f; //To move with speed
     public float acceleration = 15f; //Gia tooc
     public float friction = 15f;//ma sat
     private Vector3 velocity = Vector3.zero;
+    
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     void Start()
     {
         Debug.Log("Start");
+        Bullet = PoolingPlayerBullet1.instance.Bullet1Prefaps;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!GetComponent<PlayerHealth>().IsFainted)
-        {
-            HandleMove();
-            RotationToMouse();
-            ShootBullet();
-        }
+        //if (!GetComponent<PlayerHealth>().IsFainted)
+        if (Time.timeScale == 0) return;
+        HandleMove();
+        RotationToMouse();
+        ShootBullet();
+        
 
     }
     private void HandleMove()
@@ -87,4 +91,5 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    
 }

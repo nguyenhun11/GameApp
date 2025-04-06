@@ -49,7 +49,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemySpeed: 1
-  EnemyHealth: 7
+  EnemyHealth: 10
+  damage: 10
 --- !u!114 &3415171931004601005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,7 +63,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 580ec22314be0e8418a383fbfe7a01b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NumberOfSkill: 7
+  NumberOfSkill: 15
   TimeToActive: 4
   NumberOfBullets: 10
   SpreadAngle: 10

@@ -9,6 +9,7 @@ public class EnemyBaseSkill : MonoBehaviour
     private float Timer;
     protected virtual void Start()
     {
+        ActiveSkill();
         Timer = 0f;
         bullet = PoolingEnemyBullet1.instance.Bullet1Prefaps;
     }

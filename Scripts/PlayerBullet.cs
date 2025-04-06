@@ -7,7 +7,7 @@ public class Bullettrans : BaseBullet
         if (other.CompareTag("Enemy"))
         {
             Debug.Log("Kill");
-            other.GetComponent<BaseEnemy>().ModifiHealth(-1);
+            other.GetComponent<BaseEnemy>().ModifiHealth(-damage);
             Destroy();
         }
     }

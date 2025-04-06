@@ -47,8 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a7a7b876bce3c3459d813f710bed917, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyHealth: 4
   EnemySpeed: 3
+  EnemyHealth: 4
+  damage: 4
 --- !u!212 &3357952486283866954
 SpriteRenderer:
   m_ObjectHideFlags: 0

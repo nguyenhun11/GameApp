@@ -5,6 +5,7 @@ public class BaseEnemy : MonoBehaviour
 {
     [SerializeField] protected float EnemySpeed = 2f;
     [SerializeField] protected int EnemyHealth = 1;
+    public int damage = 1;
     //[HideInInspector] public PoolingEnemy myPool;
 
     ///////////////////////////
@@ -94,6 +95,7 @@ public class BaseEnemy : MonoBehaviour
     
     private void Die()
     {
+        GameManager.instance.AddScore(damage);
         Destroy(gameObject);
         //ReturnToPool();
     }

@@ -50,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemySpeed: 2
   EnemyHealth: 6
+  damage: 6
 --- !u!114 &5457725484471193750
 MonoBehaviour:
   m_ObjectHideFlags: 0

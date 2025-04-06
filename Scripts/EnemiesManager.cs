@@ -9,6 +9,21 @@ using UnityEngine.UIElements;
 
 public class EnemiesManager : MonoBehaviour
 {
+    #region singleton
+    public static EnemiesManager instance;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
+    #endregion 
+
     private GameObject player;
     //private PoolingEnemy1 Enemy1;
     //private PoolingEnemy2 Enemy2;
@@ -149,7 +164,10 @@ public class EnemiesManager : MonoBehaviour
             Enemy5.GetComponent<Enemy5>().Appear(Enemy5);
         }
     }
-
+    public int GetEnemyLeft()
+    {
+        return NumberEnemy1+NumberEnemy2 + NumberEnemy3 + NumberEnemy4 + NumberEnemy5;
+    }
 
 
 }

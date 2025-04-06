@@ -7,8 +7,8 @@ public class EnemyBullet : BaseBullet
     {
         if (collision.CompareTag("Player"))
         {
-            collision.GetComponent<PlayerHealth>().ModifyHealth(-1);
-            collision.GetComponent<PlayerHealth>().TempDeath();
+            collision.GetComponent<PlayerHealth>().ModifyHealth(-damage);
+            //collision.GetComponent<PlayerHealth>().TempDeath();
             Destroy();
         }
     }
