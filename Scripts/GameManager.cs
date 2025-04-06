@@ -17,31 +17,42 @@ public class GameManager : MonoBehaviour
         }
     }
     #endregion 
-    public Scene Round;
 
     public int score;
-    [SerializeField] private GameObject GameOverPanel; 
 
     protected void Start()
     {
         score = 0;
-        GameOverPanel.SetActive(false);
-    }
-
-    public void GameOver()
-    {
-        Debug.Log("GameOver");
-        Time.timeScale = 0;
-        GameOverPanel.SetActive(true);
+        Time.timeScale = 1;
     }
     public void AddScore(int a)
     {
         score += a;
         Debug.Log("Add " + a + " score");
     }
-    public void ReStart()
+    public void GameOver()
+    {
+        Time.timeScale = 0;
+        UIManager.instance.GameOver();
+    }
+    public void GameWin()
+    {
+        Time.timeScale = 0;
+        UIManager.instance.GameWin();
+    }
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+    public void LoadRound1()
     {
         SceneManager.LoadScene("Round1");
         Time.timeScale = 1;
     }
+    public void LoadHomeScene()
+    {
+        SceneManager.LoadScene("Home");
+        Time.timeScale = 0;
+    }
+    
 }
