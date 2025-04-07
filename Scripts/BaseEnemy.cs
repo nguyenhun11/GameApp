@@ -22,7 +22,7 @@ public class BaseEnemy : MonoBehaviour
         AutoDestroy();
     }
 
-    protected void AutoDestroy()
+    protected virtual void AutoDestroy()
     {
         float Height = Camera.main.orthographicSize;
         float Width = Height * Camera.main.aspect;
@@ -95,9 +95,12 @@ public class BaseEnemy : MonoBehaviour
     
     private void Die()
     {
-        GameManager.instance.AddScore(damage);
         Destroy(gameObject);
-        //ReturnToPool();
+        EnemiesManager.instance.EnemyLeft--;
+        if (EnemiesManager.instance.EnemyLeft <= 0)
+        {
+            GameManager.instance.GameWin();
+        }
     }
 
     //private void ReturnToPool()

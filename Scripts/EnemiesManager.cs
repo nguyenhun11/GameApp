@@ -25,11 +25,6 @@ public class EnemiesManager : MonoBehaviour
     #endregion 
 
     private GameObject player;
-    //private PoolingEnemy1 Enemy1;
-    //private PoolingEnemy2 Enemy2;
-    //private PoolingEnemy3 Enemy3;
-    //private PoolingEnemy4 Enemy4;
-    //private PoolingEnemy5 Enemy5;
     [SerializeField] private GameObject Enemy1;
     [SerializeField] private int NumberEnemy1;
     [SerializeField] private GameObject Enemy2;
@@ -40,8 +35,7 @@ public class EnemiesManager : MonoBehaviour
     [SerializeField] private int NumberEnemy4;
     [SerializeField] private GameObject Enemy5;
     [SerializeField] private int NumberEnemy5;
-
-
+    public int EnemyLeft;
 
     [SerializeField] private float minTimeAppear;
     [SerializeField] private float maxTimeAppear;
@@ -55,6 +49,12 @@ public class EnemiesManager : MonoBehaviour
         spawnTimer = 0;
         spawnInterval = Random.Range(minTimeAppear, maxTimeAppear);
         player = GameObject.FindGameObjectWithTag("Player");
+        EnemyLeft = NumberEnemy1 + NumberEnemy2 + NumberEnemy3 + NumberEnemy4 + NumberEnemy5;
+        GameManager.instance.maxScore = NumberEnemy1 * Enemy1.GetComponent<BaseEnemy>().damage
+            + NumberEnemy2 * Enemy2.GetComponent<BaseEnemy>().damage
+            + NumberEnemy3 * Enemy3.GetComponent<BaseEnemy>().damage
+            + NumberEnemy4 * Enemy4.GetComponent<BaseEnemy>().damage
+            + NumberEnemy5 * Enemy5.GetComponent<BaseEnemy>().damage;
         ChooseEnemyType();
     }
 
@@ -62,7 +62,6 @@ public class EnemiesManager : MonoBehaviour
     void Update()
     {
         EnemyAppear();
-
     }
     private void ChooseEnemyType()
     {
@@ -164,90 +163,9 @@ public class EnemiesManager : MonoBehaviour
             Enemy5.GetComponent<Enemy5>().Appear(Enemy5);
         }
     }
-    public int GetEnemyLeft()
-    {
-        return NumberEnemy1+NumberEnemy2 + NumberEnemy3 + NumberEnemy4 + NumberEnemy5;
-    }
+    
 
 
 }
 
 
-//using System.Collections.Generic;
-//using UnityEngine;
-
-//public class EnemiesManager : MonoBehaviour
-//{
-//    [System.Serializable]
-//    public class EnemyPoolData
-//    {
-//        public int enemyType;
-//        public PoolingEnemy pool;
-//        public int maxSpawn;
-//    }
-
-//    [SerializeField] private List<EnemyPoolData> enemyPools;
-
-//    [SerializeField] private float minTimeAppear;
-//    [SerializeField] private float maxTimeAppear;
-
-//    private float spawnTimer;
-//    private float spawnInterval;
-//    private GameObject player;
-//    private Dictionary<int, EnemyPoolData> poolDict = new();
-
-//    void Start()
-//    {
-//        player = GameObject.FindGameObjectWithTag("Player");
-
-//        foreach (var data in enemyPools)
-//        {
-//            poolDict[data.enemyType] = data;
-//        }
-
-//        ResetSpawnTimer();
-//    }
-
-//    void Update()
-//    {
-//        if (player == null) return;
-
-//        spawnTimer += Time.deltaTime;
-//        if (spawnTimer >= spawnInterval)
-//        {
-//            SpawnRandomEnemy();
-//            ResetSpawnTimer();
-//        }
-//    }
-
-//    private void ResetSpawnTimer()
-//    {
-//        spawnTimer = 0f;
-//        spawnInterval = Random.Range(minTimeAppear, maxTimeAppear);
-//    }
-
-//    private void SpawnRandomEnemy()
-//    {
-//        var available = new List<int>();
-//        foreach (var kvp in poolDict)
-//        {
-//            if (kvp.Value.maxSpawn > 0)
-//                available.Add(kvp.Key);
-//        }
-
-//        if (available.Count == 0) return;
-
-//        int type = available[Random.Range(0, available.Count)];
-//        var poolData = poolDict[type];
-
-//        GameObject enemyObj = poolData.pool.GetEnemy();
-//        BaseEnemy enemy = enemyObj.GetComponent<BaseEnemy>();
-//        enemy.myPool = poolData.pool;
-
-//        Vector3 pos = enemy.firstPositionRandomAppear();
-//        Quaternion rot = enemy.firstRotation(pos);
-//        enemy.Appear(pos, rot);
-
-//        poolData.maxSpawn--;
-//    }
-//}

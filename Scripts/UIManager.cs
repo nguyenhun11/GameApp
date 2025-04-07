@@ -1,6 +1,8 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using NUnit.Framework;
+using System.Collections.Generic;
 
 public class UIManager : MonoBehaviour
 {
@@ -24,6 +26,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject PausePanel;
     [SerializeField] private GameObject PauseButton;
     [SerializeField] private GameObject WinPanel;
+    [SerializeField] private TextMeshProUGUI FinalScore;
+    [SerializeField] private List<GameObject> Stars;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -32,13 +36,15 @@ public class UIManager : MonoBehaviour
         PauseButton.SetActive(true);
         GameOverPanel.SetActive(false);
         PausePanel.SetActive(false);
+        WinPanel.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
         scoreText.SetText(GameManager.instance.score.ToString());
-        EnemyLeft.SetText(EnemiesManager.instance.GetEnemyLeft().ToString());
+        
+        EnemyLeft.SetText(EnemiesManager.instance.EnemyLeft.ToString());
     }
     public void GameOver()
     {
@@ -67,8 +73,19 @@ public class UIManager : MonoBehaviour
     }
     public void GameWin()
     {
+        FinalScore.SetText(GameManager.instance.score.ToString());
         WinPanel.SetActive(true);
+        int count = GameManager.instance.stars;
+        for(int i = 0;i< count; i++)
+        {
+            Stars[i].SetActive(true);
+        }
+        for(int i = count; i < 5; i++)
+        {
+            Stars[i].SetActive(false);
+        }
     }
+    
     
 
 

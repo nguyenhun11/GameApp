@@ -8,6 +8,7 @@ public class Bullettrans : BaseBullet
         {
             Debug.Log("Kill");
             other.GetComponent<BaseEnemy>().ModifiHealth(-damage);
+            GameManager.instance.AddScore(damage);
             Destroy();
         }
     }
